@@ -1,0 +1,40 @@
+Use a hash set to store the elements of the array and check if any element is already present in the set. 
+If yes, then the array contains duplicates and the function returns true. 
+If no, then the array does not contain duplicates and the function returns false.
+
+
+#include <iostream>
+#include <unordered_set>
+#include <vector>
+using namespace std;
+
+bool containsDuplicate(vector<int>& nums) {
+    // Check if the array is empty
+    if (nums.empty()) {
+        return false;
+    }
+    
+    // Create a hash set to store the elements of the array
+    unordered_set<int> seen;
+    
+    // Loop through the array
+    for (int num : nums) {
+        // If the element is already in the set, return true
+        if (seen.count(num) > 0) {
+            return true;
+        }
+        // Otherwise, add the element to the set
+        seen.insert(num);
+    }
+    
+    // If the loop ends without returning true, return false
+    return false;
+}
+
+int main() {
+    // Test the function with an example array
+    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 1};
+    bool result = containsDuplicate(nums);
+    cout << "The result is: " << result << endl;
+    return 0;
+}
