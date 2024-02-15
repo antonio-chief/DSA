@@ -1,0 +1,32 @@
+One possible solution is to use the XOR operation, which has the following properties:
+
+XOR of a number with itself is 0.
+XOR of a number with 0 is the number itself.
+XOR is commutative and associative.
+Therefore, if we XOR all the elements of the array, the result will be the single element that appears only once.
+
+
+#include <stdio.h>
+
+int singleNumber(int nums[], int n) {
+    // Initialize the result to 0
+    int result = 0;
+    
+    // Loop through the array
+    for (int i = 0; i < n; i++) {
+        // XOR the current element with the result
+        result = result ^ nums[i];
+    }
+    
+    // Return the result
+    return result;
+}
+
+int main() {
+    // Test the function with an example array
+    int nums[] = {2, 2, 1, 4, 1};
+    int n = sizeof(nums) / sizeof(nums[0]);
+    int single = singleNumber(nums, n);
+    printf("The single element is: %d\n", single);
+    return 0;
+}
