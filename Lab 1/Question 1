@@ -1,0 +1,47 @@
+Use two pointers, one to iterate over the array and one to keep track of the unique elements. 
+Whenever you encounter a duplicate element, you skip it and move the first pointer forward. 
+Whenever you encounter a non-duplicate element, you copy it to the second pointer and move both pointers forward. 
+This way, you can modify the array in-place and return the new length as the position of the second pointer.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int removeDuplicates(vector<int>& nums) {
+    // Check if the array is empty
+    if (nums.empty()) {
+        return 0;
+    }
+    
+    // Initialize two pointers
+    int i = 0; // The first pointer to iterate over the array
+    int j = 0; // The second pointer to keep track of the unique elements
+    
+    // Loop through the array
+    while (i < nums.size()) {
+        // If the current element is not a duplicate
+        if (nums[i] != nums[j]) {
+            // Copy it to the second pointer
+            j++;
+            nums[j] = nums[i];
+        }
+        // Move the first pointer forward
+        i++;
+    }
+    
+    // Return the new length as the position of the second pointer
+    return j + 1;
+}
+
+int main() {
+    // Test the function with an example array
+    vector<int> nums = {1, 1, 2, 3, 3, 4, 5, 5};
+    int len = removeDuplicates(nums);
+    cout << "The new length is: " << len << endl;
+    cout << "The modified array is: ";
+    for (int i = 0; i < len; i++) {
+        cout << nums[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
