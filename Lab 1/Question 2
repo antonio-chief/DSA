@@ -1,0 +1,55 @@
+Use a reverse function that reverses a part of the array from a given start index to a given end index. 
+Then, you can apply the reverse function three times: first, to the whole array; second, to the first k elements; and third, to the remaining n - k elements. 
+This way, you can rotate the array to the right by k steps in-place.
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Define a function to reverse a part of the array
+void reverse(vector<int>& nums, int start, int end) {
+    // Loop until the start and end pointers meet or cross
+    while (start < end) {
+        // Swap the elements at the start and end pointers
+        int temp = nums[start];
+        nums[start] = nums[end];
+        nums[end] = temp;
+        // Move the pointers towards the middle
+        start++;
+        end--;
+    }
+}
+
+// Define a function to rotate the array to the right by k steps
+void rotate(vector<int>& nums, int k) {
+    // Check if the array is empty or k is zero
+    if (nums.empty() || k == 0) {
+        return;
+    }
+    
+    // Adjust k to be within the range of the array length
+    k = k % nums.size();
+    
+    // Reverse the whole array
+    reverse(nums, 0, nums.size() - 1);
+    
+    // Reverse the first k elements
+    reverse(nums, 0, k - 1);
+    
+    // Reverse the remaining n - k elements
+    reverse(nums, k, nums.size() - 1);
+}
+
+int main() {
+    // Test the function with an example array
+    vector<int> nums = {1, 2, 3, 4, 5, 6, 7};
+    int k = 3;
+    rotate(nums, k);
+    cout << "The rotated array is: ";
+    for (int i = 0; i < nums.size(); i++) {
+        cout << nums[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
