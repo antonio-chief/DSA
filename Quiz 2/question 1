@@ -1,0 +1,57 @@
+write a function that checks if the linked list in an array of the form o(1)(constant memory) has a cycle eg 2,2,2,2,2
+
+
+public class LinkedListCycleChecker {
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public static boolean hasCycle(int[] arr) {
+        int n = arr.length;
+        Node head = null;
+        Node current = null;
+
+        // Create a linked list from the array
+        for (int value : arr) {
+            Node newNode = new Node(value);
+            if (head == null) {
+                head = newNode;
+                current = head;
+            } else {
+                current.next = newNode;
+                current = newNode;
+            }
+        }
+
+        // Detect cycle using Floyd's Cycle Detection Algorithm
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                return true; // Cycle detected
+            }
+        }
+
+        return false; // No cycle found
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 3, 3, 3, 3, 3 };
+
+        if (hasCycle(arr)) {
+            System.out.println("Linked list structure has a cycle.");
+        } else {
+            System.out.println("No cycle detected in the linked list structure.");
+        }
+    }
+}
