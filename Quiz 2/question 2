@@ -1,0 +1,27 @@
+write a function that checks if there's a linked list in an array of 3,3,3,3,3
+
+
+public class LinkedListInArrayChecker {
+    public static boolean hasLinkedList(int[] arr) {
+        int n = arr.length;
+
+        // Traverse the array and look for consecutive identical elements
+        for (int i = 0; i < n - 1; i++) {
+            if (arr[i] == arr[i + 1]) {
+                return true; // Found a linked list segment
+            }
+        }
+
+        return false; // No linked list found
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 3, 3, 3, 3, 3 };
+
+        if (hasLinkedList(arr)) {
+            System.out.println("Linked list structure found in the array.");
+        } else {
+            System.out.println("No linked list structure detected.");
+        }
+    }
+}
